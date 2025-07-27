@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_searchFragment_to_imageFragment"
             app:destination="@id/imageFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_indexFragment"
+            app:destination="@id/indexFragment" />
     </fragment>
     <fragment
         android:id="@+id/imageFragment"
