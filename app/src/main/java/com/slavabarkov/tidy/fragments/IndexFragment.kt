@@ -28,7 +28,7 @@ class IndexFragment : Fragment() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            mORTImageViewModel.generateIndex()
+            //mORTImageViewModel.generateIndex()
         } else {
             Toast.makeText(context, "The app requires storage permissions!", Toast.LENGTH_SHORT).show()
         }

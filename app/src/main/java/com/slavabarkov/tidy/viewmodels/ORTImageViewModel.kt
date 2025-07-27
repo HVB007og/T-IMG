@@ -31,6 +31,8 @@ class ORTImageViewModel(application: Application) : AndroidViewModel(application
     var idxList: ArrayList<Long> = arrayListOf()
     var embeddingsList: ArrayList<FloatArray> = arrayListOf()
     var progress: MutableLiveData<Double> = MutableLiveData(0.0)
+    val isIndexing = MutableLiveData<Boolean>()
+    val isIndexEmpty = MutableLiveData<Boolean>()
 
     init {
         val imageEmbeddingDao = ImageEmbeddingDatabase.getDatabase(application).imageEmbeddingDao()
@@ -38,6 +40,8 @@ class ORTImageViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun generateIndex() {
+        isIndexing.postValue(true)
+
         val modelID = R.raw.visual_quant
         val resources = getApplication<Application>().resources
         val model = resources.openRawResource(modelID).readBytes()
@@ -113,6 +117,8 @@ class ORTImageViewModel(application: Application) : AndroidViewModel(application
             cursor?.close()
             session.close()
             progress.setValue(1.0)
+            isIndexing.postValue(false)
+            isIndexEmpty.postValue(idxList.isEmpty())
         }
     }
 }
